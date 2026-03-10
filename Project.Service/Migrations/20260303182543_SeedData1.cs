@@ -1,0 +1,61 @@
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
+
+namespace Project.Service.Migrations
+{
+    /// <inheritdoc />
+    public partial class SeedData1 : Migration
+    {
+        /// <inheritdoc />
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.UpdateData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 1,
+                column: "CreatedAt",
+                value: new DateTime(2026, 3, 3, 18, 25, 42, 755, DateTimeKind.Utc).AddTicks(7386));
+
+            migrationBuilder.UpdateData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 2,
+                column: "CreatedAt",
+                value: new DateTime(2026, 3, 3, 18, 25, 42, 755, DateTimeKind.Utc).AddTicks(7615));
+
+            migrationBuilder.UpdateData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3,
+                column: "CreatedAt",
+                value: new DateTime(2026, 3, 3, 18, 25, 42, 755, DateTimeKind.Utc).AddTicks(7617));
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.UpdateData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 1,
+                column: "CreatedAt",
+                value: new DateTime(2026, 3, 3, 18, 24, 19, 188, DateTimeKind.Utc).AddTicks(769));
+
+            migrationBuilder.UpdateData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 2,
+                column: "CreatedAt",
+                value: new DateTime(2026, 3, 3, 18, 24, 19, 188, DateTimeKind.Utc).AddTicks(1038));
+
+            migrationBuilder.UpdateData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 3,
+                column: "CreatedAt",
+                value: new DateTime(2026, 3, 3, 18, 24, 19, 188, DateTimeKind.Utc).AddTicks(1040));
+        }
+    }
+}
