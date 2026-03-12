@@ -29,7 +29,7 @@ namespace Project.Service.Services
         public async Task<IEnumerable<CategoryDTO>> GetAllAsync()
         {
             return await _context.ProductCategories
-                .Select(c => c.ToDTO())
+                .Select(CategoryMappingExtension.ToDTOExpression)
                 .ToListAsync();
         }
         public async Task<CategoryDTO> GetByIdAsync(int id)

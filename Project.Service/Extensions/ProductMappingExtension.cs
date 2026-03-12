@@ -2,6 +2,7 @@
 using Project.Service.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Project.Service.Extensions
@@ -34,5 +35,17 @@ namespace Project.Service.Extensions
                 CreatedAt = DateTime.UtcNow
             };
         }
+
+        public static Expression<Func<Product, ProductDTO>> ToDTOExpression =
+            product => new ProductDTO
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                StockQuantity = product.StockQuantity,
+                IsActive = product.IsActive,
+                CreatedAt = product.CreatedAt,
+                CategoryName = product.Category != null ? product.Category.Name : null
+            };
     }
 }

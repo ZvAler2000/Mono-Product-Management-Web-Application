@@ -3,11 +3,13 @@
     public class GlobalExceptionMiddleware
     {
         private readonly RequestDelegate _next;
-        public GlobalExceptionMiddleware(RequestDelegate next)
+        private readonly ILogger<GlobalExceptionMiddleware> _logger;
+        public GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExceptionMiddleware> logger)
         {
             _next = next;
+            _logger = logger;
         }
-        public async Task Invoke(HttpContext context)
+        public async Task InvokeAsync(HttpContext context)
         {
             try
             {
@@ -15,11 +17,13 @@
             }
             catch (ArgumentException ex)
             {
+                _logger.LogError(ex, ex.Message);
                 context.Response.StatusCode = 400;
                 await context.Response.WriteAsJsonAsync(new { message = ex.Message });
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 context.Response.StatusCode = 500;
                 await context.Response.WriteAsJsonAsync(new { message = "An unexpected error occured." });
             }

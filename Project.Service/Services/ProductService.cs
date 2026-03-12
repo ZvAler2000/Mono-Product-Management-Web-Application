@@ -37,7 +37,7 @@ namespace Project.Service.Services
         {
             return await _context.Products
                 .Include(p => p.Category)
-                .Select(p => p.ToDTO())
+                .Select(ProductMappingExtension.ToDTOExpression)
                 .ToListAsync();
         }
         public async Task<ProductDTO?> GetByIdAsync(int id)
@@ -45,6 +45,12 @@ namespace Project.Service.Services
             var product = await _context.Products
                 .Include(p => p.Category)
                 .FirstOrDefaultAsync(p => p.Id == id);
+
+            if(product == null)
+            {
+                return null;
+            }
+
             return product.ToDTO();
         }
         public async Task<bool> UpdateAsync(int id, UpdateProductDTO dto)
@@ -129,8 +135,9 @@ namespace Project.Service.Services
             var items = await products
                 .Skip((query.Page - 1) * query.PageSize)
                 .Take(query.PageSize)
-                .Select(p => p.ToDTO())
+                .Select(ProductMappingExtension.ToDTOExpression)
                 .ToListAsync();
+
 
             return new PagedResult<ProductDTO>(items, count);
         }

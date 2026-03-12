@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using Project.Service.DTOs;
 using Project.Service.Entities;
@@ -26,5 +27,13 @@ namespace Project.Service.Extensions
                 Description = dto.Description
             };
         }
+
+        public static Expression<Func<ProductCategory, CategoryDTO>> ToDTOExpression =
+            category => new CategoryDTO
+            {
+                Id = category.Id,
+                Name = category.Name,
+                Description = category.Description
+            };
     }
 }
